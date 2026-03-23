@@ -1,0 +1,372 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* NearBuy Design System Colors */
+  --bg: #F7F5F0;
+  --card: #FFFFFF;
+  --ink: #0E0C08;
+  --ink2: #2A271E;
+  --ink3: #6B6558;
+  --ink4: #ABA89F;
+  --border: #E8E4DC;
+  --border2: #F0EDE6;
+  
+  /* Primary Green */
+  --g: #1B6B3A;
+  --g2: #155C30;
+  --gl: #E5F2EB;
+  --gxl: #F0FAF4;
+  
+  /* Accent Colors */
+  --amber: #B86A0A;
+  --ambl: #FFF4E5;
+  --blue: #1A4FBF;
+  --bluel: #EEF3FF;
+  --red: #C0392B;
+  --redl: #FEF0EE;
+  --gold: #8A6200;
+  --goldl: #FFF8E5;
+  
+  /* Shadows */
+  --sh: 0 1px 3px rgba(14,12,8,.07), 0 0 0 1px rgba(14,12,8,.05);
+  --shm: 0 4px 20px rgba(14,12,8,.09), 0 0 0 1px rgba(14,12,8,.04);
+  --shl: 0 16px 48px rgba(14,12,8,.14), 0 0 0 1px rgba(14,12,8,.05);
+  
+  /* Border Radius */
+  --r: 18px;
+  --rs: 12px;
+  --rx: 8px;
+  --rf: 999px;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100%;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Hide scrollbar but allow scrolling */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  /* Typography */
+  .font-serif {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+  
+  /* Text Balance for headings */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Status Bar */
+  .status-bar {
+    @apply h-[52px] bg-card flex items-end justify-between px-7 pb-2.5 flex-shrink-0 relative z-50;
+  }
+  
+  .status-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 36px;
+    background: inherit;
+    border-radius: 0 0 24px 24px;
+  }
+  
+  /* Bottom Navigation */
+  .bottom-nav {
+    @apply h-[84px] bg-card border-t border-border flex items-center px-2 pb-4 flex-shrink-0 relative z-20;
+  }
+  
+  .bottom-nav-item {
+    @apply flex-1 flex flex-col items-center gap-1 bg-transparent border-none cursor-pointer py-2 px-1;
+  }
+  
+  .bottom-nav-item .nav-icon {
+    @apply text-[22px] transition-transform duration-200;
+  }
+  
+  .bottom-nav-item .nav-label {
+    @apply text-[9px] font-bold text-ink-4 tracking-wider uppercase;
+  }
+  
+  .bottom-nav-item.active .nav-label {
+    @apply text-primary font-extrabold;
+  }
+  
+  .bottom-nav-item.active .nav-icon {
+    @apply scale-115;
+    filter: drop-shadow(0 0 4px rgba(27,107,58,.5));
+  }
+  
+  /* Bottom Nav Add Button */
+  .bottom-nav-add {
+    @apply w-[54px] h-[54px] rounded-full bg-ink text-white text-[26px] border-none cursor-pointer flex items-center justify-center flex-shrink-0 -mt-[18px] transition-transform duration-150;
+    box-shadow: 0 4px 20px rgba(14,12,8,.3);
+  }
+  
+  .bottom-nav-add:active {
+    @apply scale-[0.92];
+  }
+  
+  /* Tags */
+  .tag {
+    @apply inline-flex items-center gap-[3px] px-2 py-[3px] rounded-full text-[10px] font-extrabold tracking-wide;
+  }
+  
+  .tag-green {
+    @apply bg-primary-light text-primary-dark;
+  }
+  
+  .tag-amber {
+    @apply bg-warning-light text-warning;
+  }
+  
+  .tag-blue {
+    @apply bg-info-light text-info;
+  }
+  
+  .tag-red {
+    @apply bg-destructive-light text-destructive;
+  }
+  
+  .tag-gold {
+    @apply bg-gold-light text-gold;
+  }
+  
+  .tag-gray {
+    @apply bg-muted text-ink-3;
+  }
+  
+  .tag-dark {
+    @apply bg-ink text-white;
+  }
+  
+  /* Product Card */
+  .product-card {
+    @apply bg-card rounded-lg overflow-hidden cursor-pointer transition-all duration-150 flex-shrink-0;
+    box-shadow: var(--sh);
+  }
+  
+  .product-card:active {
+    @apply scale-[0.97];
+    box-shadow: var(--shm);
+  }
+  
+  /* Search Bar */
+  .searchbar {
+    @apply flex items-center gap-2.5 bg-card rounded-md py-3 px-4;
+    box-shadow: var(--sh);
+    border: 1.5px solid var(--border2);
+  }
+  
+  /* Tracker */
+  .tracker-step {
+    @apply flex gap-3 pb-[18px] relative;
+  }
+  
+  .tracker-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    width: 2px;
+    height: calc(100% - 14px);
+    background: var(--border);
+  }
+  
+  .tracker-step.done::after {
+    background: var(--g);
+  }
+  
+  .tracker-dot {
+    @apply w-[30px] h-[30px] rounded-full flex-shrink-0 flex items-center justify-center text-xs z-[1] relative bg-background;
+    border: 2px solid var(--border);
+  }
+  
+  .tracker-step.done .tracker-dot {
+    @apply bg-primary text-white;
+    border-color: var(--g);
+  }
+  
+  .tracker-step.active .tracker-dot {
+    @apply bg-card;
+    border-color: var(--g);
+    border-width: 2.5px;
+    box-shadow: 0 0 0 4px var(--gl);
+  }
+  
+  /* Trust Ring */
+  .trust-ring {
+    @apply relative w-12 h-12 flex-shrink-0;
+  }
+  
+  .trust-ring svg {
+    transform: rotate(-90deg);
+  }
+  
+  .trust-ring-value {
+    @apply absolute inset-0 flex items-center justify-center text-[13px] font-black text-primary;
+  }
+  
+  /* Avatar */
+  .avatar {
+    @apply rounded-full overflow-hidden flex items-center justify-center font-extrabold bg-primary-light text-primary-dark flex-shrink-0;
+  }
+  
+  /* Review Card */
+  .review-card {
+    @apply bg-background rounded-md p-3.5;
+  }
+  
+  /* Deal Room Message */
+  .dr-bubble {
+    @apply py-2.5 px-3.5 rounded-2xl text-[13px] leading-relaxed max-w-[75%];
+  }
+  
+  .dr-bubble-theirs {
+    @apply bg-card text-ink rounded-bl-sm;
+    box-shadow: var(--sh);
+  }
+  
+  .dr-bubble-mine {
+    @apply bg-primary text-white rounded-br-sm;
+  }
+  
+  /* Toggle */
+  .toggle {
+    @apply w-[46px] h-[26px] rounded-[13px] bg-border relative cursor-pointer transition-colors duration-200 border-none flex-shrink-0;
+  }
+  
+  .toggle.on {
+    @apply bg-primary;
+  }
+  
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  }
+  
+  .toggle.on::after {
+    transform: translateX(20px);
+  }
+  
+  /* Vendor Stat */
+  .vendor-stat {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    @apply rounded-md p-3.5;
+  }
+  
+  /* Shimmer Loading */
+  .shimmer {
+    background: linear-gradient(90deg, var(--border2) 25%, var(--border) 50%, var(--border2) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    @apply rounded-lg;
+  }
+  
+  /* OTP Box */
+  .otp-box {
+    @apply w-[52px] h-[60px] rounded-md flex items-center justify-center text-2xl font-black text-ink;
+    border: 2px solid var(--border);
+    background: var(--card);
+  }
+  
+  .otp-box.filled {
+    border-color: var(--g);
+    @apply text-primary;
+  }
+  
+  /* Provider Card */
+  .provider-card {
+    @apply bg-card rounded-md p-3.5 flex items-center gap-3 cursor-pointer transition-all duration-150;
+    border: 2px solid var(--border);
+    box-shadow: var(--sh);
+  }
+  
+  .provider-card.selected {
+    border-color: var(--g);
+    @apply bg-primary-xlight;
+  }
+  
+  /* Paystack Modal */
+  .paystack-modal {
+    @apply bg-white rounded-t-3xl overflow-hidden;
+  }
+  
+  .paystack-header {
+    background: #00c3f7;
+    @apply p-5 flex items-center justify-between;
+  }
+  
+  /* Notification Dot */
+  .notif-dot {
+    @apply absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-destructive;
+    border: 1.5px solid var(--card);
+  }
+  
+  /* Map Styles */
+  .map-wrap {
+    @apply relative rounded-lg overflow-hidden;
+    background: #e8f0e8;
+  }
+  
+  .rider-marker {
+    @apply absolute w-9 h-9 rounded-full bg-primary flex items-center justify-center text-base;
+    border: 2px solid #fff;
+    box-shadow: var(--shm);
+    animation: rider-pulse 2s ease infinite;
+  }
+  
+  /* Float Back Button */
+  .float-back {
+    @apply absolute top-[66px] left-4 z-30 w-[38px] h-[38px] rounded-full flex items-center justify-center text-lg cursor-pointer border-none;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--sh);
+  }
+}
